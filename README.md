@@ -67,7 +67,7 @@ This output is generated so that:
 
 Following the above example output, the output needs to be interpreted like this:
 
-1. Calculate the checksum, to see if no transmission errors occured. Sum up all values except the checksum: `0x3C + 0x02 + 0x08 + 0xFC + 0x00 + 0x79 + 0x01 + 0xD7 + 0x00 + 0x13 + 0x00 + 0x22 + 0x1B + 0x03 + 0x30 + 0x02 = 0x318` and check if the check sum fits into the sum.
+1. Calculate the checksum, to see if no transmission errors occured. Sum up all values except the checksum: `0x3C + 0x02 + 0x08 + 0xFC + 0x00 + 0x79 + 0x01 + 0xD7 + 0x00 + 0x13 + 0x00 + 0x22 + 0x1B + 0x03 + 0x30 + 0x02 = 0x18` and check if the check sum is equal to the sum.
 2. Calculate CO2: `Byte03 * 256 + Byte04 = 0x08 * 256 + 0xFC = 2300` (ppm)
 2. Calculate Formaldehyde: `Byte05 * 256 + Byte06 = 0x00 * 256 + 0x79 = 121` (ug/m3)
 2. Calculate TVOC: `Byte07 * 256 + Byte08 = 0x01 * 256 + 0xD7 = 471` (ug/m3)
