@@ -13,8 +13,16 @@ The SM300D2 module provides the following sensors:
 | TVOC    | 0 - 2000 µg/m³ | Calculated |
 | PM2.5  | 5 - 100 µg/m³     | ± 10% |
 | PM10  | 5 - 100 µg/m³     | ± 10% |
-| Temperature  | -40 - +125 °C     | ± 0.5 °C |
+| Temperature  | -40 to +125 °C     | ± 0.5 °C |
 | Humidity  | 0 - 100%     | ± 3% |
+
+## Advantages
+
+- Easy setup/use
+- Consistent values
+- Inexpensive (when compared to getting each module seperately)
+- No assembly necessary
+- Relatively stable and accurate 
 
 ## Bill of Materials
 
@@ -23,27 +31,29 @@ The SM300D2 module provides the following sensors:
 | SM300D2     | ~ 40 € | [Click me](https://www.banggood.com/ESP32-Development-Board-WiFi+bluetooth-Ultra-Low-Power-Consumption-Dual-Cores-ESP-32-ESP-32S-Board-p-1109512.html) |
 | ESP32 Board | ~ 5 €  | [Click me](https://www.banggood.com/SM300D2-7-in-1-PM2_5-+-PM10-+-Temperature-+-Humidity-+-CO2-+-eCO2-+-TVOC-Sensor-Tester-Detector-Module-for-Air-Quality-Monitoring-p-1681079.html) |
 
+Cables with JST connectors where included when ordering from above shop in late January 2021.
+
 ## Connection
 
-The SM300D2 module is connected to the ESP32 via UART. The interface on the SM300d2 module is defined as:
+The SM300D2 module is connected to the ESP32 via UART. The interface on the SM300D2 module is defined as:
 
 | Pin | Name          | Description |
 |--------|----------------|----------|
 | 1    | 5V | Power  |
-| 2  | TXD     | Data output |
+| 2  | T(X)D     | Data output |
 | 3  | N/A     | Not in use |
-| 4  | GND     | Power ground |
+| 4  | G(N)D     | Power ground |
 
 The module uses:
 
-Baud rate: 9600
+- Baud rate: 9600
+- Data bits: 8 bits
+- Stop bit: 1 bit
+- Check digit: None
 
-Data bits: 8 bits
+To connect the module to the ESP32, I cut the included cable with the JST connector in half, and soldered female jumper wires onto it, including heatshrinks.
 
-Stop bit: 1 bit
-
-Check digit: None
-
+Connect the modules 5V to VIN on the ESP32, GND to GND, and the TD to the RX2 pin.
 
 When connected to the UART the module provides outputs in the following format:
 
@@ -90,6 +100,10 @@ The serial connection tool `minicom` may be used for displaying the values, make
 
 Use the `-H` flag to enable hex output and the `-w` flag to enable automatic line wrap.
 
+## Other infos
+
+The SM300D2 module (or rather its onboard sensors) needs some time (at least 48h of continued use) to "burn in" before reporting correct values. For example, right after unboxing, the module reported an indoor temperature of 26.5 °C - well above any other thermometer which all claimed the correct 22.5 °C. After 5 hours the module already showed a more accurate reading of 23.5 °C (without an actual temperature change).
+
 ## Recommended indoor guidelines (various sources)
 
 Following values are considered acceptable for private, indoor air. 
@@ -97,8 +111,8 @@ Following values are considered acceptable for private, indoor air.
 - CO2 should be lower than 1000 ppm ([Source](https://www.dhs.wisconsin.gov/chemical/carbondioxide.htm))
 - Formaldehyde should be lower than 50 µg/m³ ([Source](https://www.canada.ca/en/health-canada/services/environmental-workplace-health/reports-publications/air-quality/formaldehyde-indoor-air-environment-workplace-health.html#a3))
 - TVOC recommended levels will need to be analysed.
-- PM2.5 should be lower than 25 ug/m3 ([Source](https://www.eea.europa.eu/themes/air/air-quality-concentrations/air-quality-standards))
-- PM10 should be lower than 50 ug/m3 ([Source](https://www.eea.europa.eu/themes/air/air-quality-concentrations/air-quality-standards))
+- PM2.5 should be lower than 25 µg/m³ ([Source](https://www.eea.europa.eu/themes/air/air-quality-concentrations/air-quality-standards))
+- PM10 should be lower than 50 µg/m³ ([Source](https://www.eea.europa.eu/themes/air/air-quality-concentrations/air-quality-standards))
 - Temperature should be between 18 and 24 °C ([Source](https://apps.who.int/iris/rest/bitstreams/1161792/retrieve#page=54))
 - Humidity should be between 30 and 50 % RH ([Source](https://www.hvac.com/faq/recommended-humidity-level-home/))
 
@@ -106,4 +120,4 @@ These values should be read as suggestions for long-term indoor exposure.
 
 ## Disclaimer
 
-This hardware/software product is only for private use. No medical advice is given whatsoever. Please consult your doctor first. This is only for information purposes.
+This hardware/software product is only for private use. No medical advice is given whatsoever. Please consult your doctor first. This is only for information purposes. I am not affiliated with any shops/websites/vendors/hardware producers whatsoever.
