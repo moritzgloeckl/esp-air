@@ -25,7 +25,7 @@ The SM300D2 module provides the following sensors:
 
 ## Connection
 
-The SM300d2 module is connected to the ESP32 via UART. The interface on the SM300d2 module is defined as:
+The SM300D2 module is connected to the ESP32 via UART. The interface on the SM300d2 module is defined as:
 
 | Pin | Name          | Description |
 |--------|----------------|----------|
@@ -79,6 +79,16 @@ Following the above example output, the output needs to be interpreted like this
 4. Calculate PM10: `Byte11 * 256 + Byte12 = 0x00 * 256 + 0x22 = 34` (µg/m³)
 5. Temperature: `Byte13 + Byte14 * 0.1 = 0x1B + 0x03 * 0.1 = 27.3` (°C)
 6. Humidity: `Byte15 + Byte16 * 0.1 = 0x30 + 0x02 * 0.1 = 48.2` (% RH)
+
+## Debugging the sensor module
+
+The sensor module may be debugged and its values read, using any UART-capable device, such as a USB-TTL adapter or even an Arduino/Raspberry Pi. Hook up the 5V to the 5V of your adapter, GND to GND and TX of the module to the RX of the UART adapter.
+
+The serial connection tool `minicom` may be used for displaying the values, make sure to set the correct baud rate and stop and parity settings. Sample command:
+
+`minicom --device /dev/cu.usbserial-141220 -H -w`
+
+Use the `-H` flag to enable hex output and the `-w` flag to enable automatic line wrap.
 
 ## Recommended indoor guidelines (various sources)
 
