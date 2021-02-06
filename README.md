@@ -102,6 +102,8 @@ The serial connection tool `minicom` may be used for displaying the values, make
 
 Use the `-H` flag to enable hex output and the `-w` flag to enable automatic line wrap.
 
+Furthermore, this repository includes a Python script which can be used to debug the module on your device.
+
 ## Other infos
 
 The SM300D2 module (or rather its onboard sensors) needs some time (at least 48h of continued use) to "burn in" before reporting correct values. For example, right after unboxing, the module reported an indoor temperature of 26.5 °C - well above any other thermometer which all claimed the correct 22.5 °C. After 5 hours the module already showed a more accurate reading of 23.5 °C (without an actual temperature change).
