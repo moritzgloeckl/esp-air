@@ -1,6 +1,6 @@
-# ESPAir
+# ESPAir - Indoor air quality monitor
 
-A low-cost smart indoor air quality monitor based on the SM300D2 sensor module, an ESP32 and ESPHome.io for use with Home Assistant.
+A low-cost, smart, indoor air quality monitor based on the SM300D2 sensor module, an ESP32 and ESPHome.io for use with Home Assistant.
 
 ## Features
 
@@ -15,6 +15,8 @@ The SM300D2 module provides the following sensors:
 | PM10  | 5 - 100 µg/m³     | ± 10% |
 | Temperature  | -40 to +125 °C     | ± 0.5 °C |
 | Humidity  | 0 - 100%     | ± 3% |
+
+It should be noted that the CO2 sensor is in fact an eCO2 (equivalent carbon dioxide) sensor, which means that the CO2 is not measured, but rather calculated (or approximated) from the TVOC reading.
 
 ## Advantages
 
