@@ -1,9 +1,13 @@
+#include "esphome.h"
+
+static const char *TAG = "sm300d2";
+static const uint8_t RESPONSE_LENGTH = 17;
+
+using namespace esphome;
+
 class SM300D2Sensor : public PollingComponent,  public UARTDevice, public sensor::Sensor{
  public:
   SM300D2Sensor(UARTComponent *parent) : PollingComponent(1000), UARTDevice(parent) {}
-
-  static const char *TAG = "sm300d2";
-  static const uint8_t RESPONSE_LENGTH = 17;
 
   Sensor *co2_sensor = new Sensor();
   Sensor *formaldehyde_sensor = new Sensor();
@@ -40,12 +44,14 @@ class SM300D2Sensor : public PollingComponent,  public UARTDevice, public sensor
 
     uint16_t calculated_checksum = this->calculate_checksum(response);
     if (calculated_checksum != response[RESPONSE_LENGTH-1]) {
-      ESP_LOGW(TAG, "Checksum doesn't match: 0x%02X!=0x%02X", resp_checksum, calc_checksum);
+      ESP_LOGW(TAG, "Checksum doesn't match: 0x%02X!=0x%02X", response[RESPONSE_LENGTH-1], calculated_checksum);
       this->status_set_warning();
       return;
     }
 
     this->status_clear_warning();
+
+    ESP_LOGW(TAG, "Successfully read SM300D2 data");
 
     const uint16_t co2 = (response[2] * 256) + response[3];
     const uint16_t formaldehyde = (response[4] * 256) + response[5];
@@ -55,39 +61,32 @@ class SM300D2Sensor : public PollingComponent,  public UARTDevice, public sensor
     const float temperature = response[12] + (response[13] * 0.1);
     const float humidity = response[14] + (response[15] * 0.1);
 
-    ESP_LOGD(TAG, "Received CO₂: %u ", co2);
-    if (this->co2_sensor != nullptr)
-      this->co2_sensor->publish_state(co2);
+    ESP_LOGD(TAG, "Received CO₂: %u ppm", co2);
+    this->co2_sensor->publish_state(co2);
 
-    ESP_LOGD(TAG, "Received Formaldehyde: %u ", formaldehyde);
-    if (this->formaldehyde_sensor != nullptr)
-      this->formaldehyde_sensor->publish_state(formaldehyde);
+    ESP_LOGD(TAG, "Received Formaldehyde: %u µg/m³", formaldehyde);
+    this->formaldehyde_sensor->publish_state(formaldehyde);
 
-    ESP_LOGD(TAG, "Received TVOC: %u ", tvoc);
-    if (this->tvoc_sensor != nullptr)
-      this->tvoc_sensor->publish_state(tvoc);
+    ESP_LOGD(TAG, "Received TVOC: %u µg/m³", tvoc);
+    this->tvoc_sensor->publish_state(tvoc);
 
-    ESP_LOGD(TAG, "Received PM2.5: %u ", pm2_5);
-    if (this->pm2_5_sensor != nullptr)
-      this->pm2_5_sensor->publish_state(pm2_5);
+    ESP_LOGD(TAG, "Received PM2.5: %u µg/m³", pm2_5);
+    this->pm2_5_sensor->publish_state(pm2_5);
 
-    ESP_LOGD(TAG, "Received PM10: %u ", pm10);
-    if (this->pm10_sensor != nullptr)
-      this->pm10_sensor->publish_state(pm10);
+    ESP_LOGD(TAG, "Received PM10: %u µg/m³", pm10);
+    this->pm10_sensor->publish_state(pm10);
 
-    ESP_LOGD(TAG, "Received Temperature: %u ", temperature);
-    if (this->temperature_sensor != nullptr)
-      this->temperature_sensor->publish_state(temperature);
+    ESP_LOGD(TAG, "Received Temperature: %.2f °C", temperature);
+    this->temperature_sensor->publish_state(temperature);
 
-    ESP_LOGD(TAG, "Received Humidity: %u ", humidity);
-    if (this->humidity_sensor != nullptr)
-      this->humidity_sensor->publish_state(humidity);
+    ESP_LOGD(TAG, "Received Humidity: %.2f percent", humidity);
+    this->humidity_sensor->publish_state(humidity);
   }
 
-  uint16_t calculate_checksum(uint8_t *ptr) {
+  uint16_t calculate_checksum(uint8_t arr[RESPONSE_LENGTH]) {
     uint8_t sum = 0;
-    for (int i=0; i<(RESPONSE_LENGTH-1); i++) {
-      sum += *ptr[i];
+    for (int i = 0; i < (RESPONSE_LENGTH-1); i++) {
+      sum += arr[i];
     }
     return sum;
   }
