@@ -5,12 +5,32 @@ esphome:
   includes:
     - sm300d2.h
 
+wifi:
+  ssid: "XXX-CHANGE_ME-XXX"
+  password: "XXX-CHANGE_ME-XXX"
+  power_save_mode: none
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Test Fallback Hotspot"
+    password: "change me to a super secure password"
+
+captive_portal:
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+
 uart:
   id: uart_bus
   data_bits: 8
   stop_bits: 1
-  tx_pin: GPIO5
-  rx_pin: GPIO4
+  tx_pin: GPIO17
+  rx_pin: GPIO16
   baud_rate: 9600
 
 text_sensor:
@@ -21,13 +41,15 @@ text_sensor:
     ssid:
       name: Connected SSID
       id: ssid
-    
+
 sensor:
   - platform: wifi_signal
-    name: "WiFi Signal ${upper_devicename}"
+    name: "WiFi Signal"
     update_interval: 60s
+
   - platform: uptime
     name: Uptime
+
   - platform: custom
     lambda: |-
       auto espair_sensor = new SM300D2Sensor(id(uart_bus));
@@ -46,40 +68,33 @@ sensor:
         unit_of_measurement: "ppm"
         accuracy_decimals: 0
         icon: "mdi:molecule-co2"
-        expire_after: 60s
 
       - name: "Formaldehyde"
         unit_of_measurement: "µg/m³"
         accuracy_decimals: 0
         icon: "mdi:flask"
-        expire_after: 60s
 
       - name: "TVOC"
         unit_of_measurement: "µg/m³"
         accuracy_decimals: 0
         icon: "mdi:chemical-weapon"
-        expire_after: 60s
 
       - name: "PM2.5"
         unit_of_measurement: "µg/m³"
         accuracy_decimals: 0
         icon: "mdi:grain"
-        expire_after: 60s
 
       - name: "PM10"
         unit_of_measurement: "µg/m³"
         accuracy_decimals: 0
         icon: "mdi:grain"
-        expire_after: 60s
 
       - name: "Temperature"
         unit_of_measurement: "°C"
         accuracy_decimals: 1
         icon: "mdi:thermometer"
-        expire_after: 60s
 
       - name: "Humidity"
         unit_of_measurement: "%"
         accuracy_decimals: 1
         icon: "mdi:water-percent"
-        expire_after: 60s
