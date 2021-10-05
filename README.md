@@ -30,8 +30,8 @@ It should be noted that the CO2 sensor is in fact an eCO2 (equivalent carbon dio
 
 | Part        | Price  | Link     |
 |-------------|--------|----------|
-| SM300D2     | ~ 40 € | [Click me](https://www.banggood.com/ESP32-Development-Board-WiFi+bluetooth-Ultra-Low-Power-Consumption-Dual-Cores-ESP-32-ESP-32S-Board-p-1109512.html) |
-| ESP32 Board | ~ 5 €  | [Click me](https://www.banggood.com/SM300D2-7-in-1-PM2_5-+-PM10-+-Temperature-+-Humidity-+-CO2-+-eCO2-+-TVOC-Sensor-Tester-Detector-Module-for-Air-Quality-Monitoring-p-1681079.html) |
+| SM300D2     | ~ 40 € | [Click me](https://www.banggood.com/SM300D2-7-in-1-PM2_5-+-PM10-+-Temperature-+-Humidity-+-CO2-+-eCO2-+-TVOC-Sensor-Tester-Detector-Module-for-Air-Quality-Monitoring-p-1681079.html) |
+| ESP32 Board | ~ 5 €  | [Click me](https://www.banggood.com/ESP32-Development-Board-WiFi+bluetooth-Ultra-Low-Power-Consumption-Dual-Cores-ESP-32-ESP-32S-Board-p-1109512.html) |
 
 Cables with JST connectors where included when ordering from above shop in late January 2021.
 
