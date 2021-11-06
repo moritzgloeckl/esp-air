@@ -104,9 +104,21 @@ Use the `-H` flag to enable hex output and the `-w` flag to enable automatic lin
 
 Furthermore, this repository includes a Python script which can be used to debug the module on your device.
 
+In order to debug the actual air quality values and see actual changes there are some options available. I tried flooding the sensor with a CO2 bottle (Sodastream) but that didn't do much. What works way better is using a pen with solvents like a Sharpie, Edding or other permanent markers and waving it near the sensors and above the fan. You'll see within about 30 seconds the values will go through the roof, e.g. CO2 will be up to 1700ppm to 2000ppm. Then you'll know your sensor is working.
+
 ## Other infos
 
 The SM300D2 module (or rather its onboard sensors) needs some time (at least 48h of continued use) to "burn in" before reporting correct values. For example, right after unboxing, the module reported an indoor temperature of 26.5 °C - well above any other thermometer which all claimed the correct 22.5 °C. After 5 hours the module already showed a more accurate reading of 23.5 °C (without an actual temperature change).
+
+## Other sensors within this sensor family
+
+I've noticed there are some newer versions of this sensors available via Aliexpress. They seem to be designed by the same manufacturing company, judging by their UART output description which stayed more or less the same. I've found three new models with model codes:
+
+- SM400D2
+- SM400D2MOD
+- MAQ7A-US
+
+Should anyone have any of these devices I'd be interested in their review. Feel free to open an issue here. 
 
 ## Recommended indoor guidelines (various sources)
 
