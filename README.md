@@ -104,7 +104,7 @@ Use the `-H` flag to enable hex output and the `-w` flag to enable automatic lin
 
 Furthermore, this repository includes a Python script which can be used to debug the module on your device.
 
-In order to debug the actual air quality values and see actual changes there are some options available. I tried flooding the sensor with a CO2 bottle (Sodastream) but that didn't do much. What works way better is using a pen with solvents like a Sharpie, Edding or other permanent markers and waving it near the sensors and above the fan. You'll see within about 30 seconds the values will go through the roof, e.g. CO2 will be up to 1700ppm to 2000ppm. Then you'll know your sensor is working.
+In order to debug the actual air quality values and see actual changes there are some options available. I tried flooding the sensor with a CO2 bottle (Sodastream) but that didn't do much, because the sensor does not detect CO2 directly but calculates its value. What works way better is using a pen with solvents like a Sharpie, Edding or other permanent markers and waving it near the sensors and above the fan. You'll see within about 30 seconds the values will go through the roof, e.g. CO2 will be up to 1700ppm to 2000ppm. Then you'll know your sensor is working.
 
 ## Other infos
 
